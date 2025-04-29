@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"derive":["Exhaust"],"mod":["iteration"],"struct":["Iter"],"trait":["Exhaust"]};

@@ -1,0 +1,1 @@
+searchState.loadedDescShard("mutants", 0, "Attribute macros to control how cargo-mutants mutates code.\n<code>cargo mutants</code> should not mutate functions marked with this …")

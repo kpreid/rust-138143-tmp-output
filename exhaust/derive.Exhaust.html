@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Derive macro generating an impl of the trait `Exhaust`."><title>Exhaust in exhaust - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-20739d33.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="exhaust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0-dev" data-channel="nightly" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../static.files/storage-4e99c027.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-124f0db4.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc derive"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../exhaust/index.html">exhaust</a><span class="version">0.2.2</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Exhaust</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#applicability" title="Applicability">Applicability</a></li><li><a href="#generated-code" title="Generated code">Generated code</a></li><li><a href="#example" title="Example">Example</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="index.html">In crate exhaust</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="index.html">exhaust</a></div><h1>Derive Macro <span class="derive">Exhaust</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/exhaust_macros/lib.rs.html#21">Source</a> </span></div><pre class="rust item-decl"><code>#[derive(Exhaust)]</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Derive macro generating an impl of the trait <a href="trait.Exhaust.html" title="trait exhaust::Exhaust"><code>Exhaust</code></a>.</p>
+<h2 id="applicability"><a class="doc-anchor" href="#applicability">§</a>Applicability</h2>
+<p>This macro may be applied to <code>struct</code>s and <code>enum</code>s, but not <code>union</code>s.
+All fields must have types which themselves implement <a href="trait.Exhaust.html" title="trait exhaust::Exhaust"><code>Exhaust</code></a>.</p>
+<div class="warning">
+<p>If your type has invariants enforced through private fields, then do not use this derive macro,
+as that would make it possible to obtain instances with any values whatsoever.
+There is not currently any way to add constraints.</p>
+</div>
+<h2 id="generated-code"><a class="doc-anchor" href="#generated-code">§</a>Generated code</h2>
+<p>The macro generates the following items:</p>
+<ul>
+<li>
+<p>An implementation of <a href="trait.Exhaust.html" title="trait exhaust::Exhaust"><code>Exhaust</code></a> for your type.</p>
+</li>
+<li>
+<p>A “factory” struct type for <code>&lt;Self as Exhaust&gt;::Factory</code>.</p>
+<p>It has no public fields.
+It implements <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone"><code>Clone</code></a> and <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug"><code>fmt::Debug</code></a>.
+It is unnameable except through the associated type, <code>&lt;Self as Exhaust&gt;::Factory</code>.</p>
+</li>
+<li>
+<p>An iterator struct type for <code>&lt;Self as Exhaust&gt;::Iter</code>.</p>
+<p>It has no public fields.
+It implements <a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator"><code>Iterator</code></a>, <a href="https://doc.rust-lang.org/nightly/core/iter/traits/marker/trait.FusedIterator.html" title="trait core::iter::traits::marker::FusedIterator"><code>FusedIterator</code></a>, <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone"><code>Clone</code></a>, and <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug"><code>fmt::Debug</code></a>,
+but not <a href="https://doc.rust-lang.org/nightly/core/iter/traits/double_ended/trait.DoubleEndedIterator.html" title="trait core::iter::traits::double_ended::DoubleEndedIterator"><code>DoubleEndedIterator</code></a> or <a href="https://doc.rust-lang.org/nightly/core/iter/traits/exact_size/trait.ExactSizeIterator.html" title="trait core::iter::traits::exact_size::ExactSizeIterator"><code>ExactSizeIterator</code></a>.
+It does not currently override any of the optional iterator methods such as
+<a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html#method.size_hint" title="method core::iter::traits::iterator::Iterator::size_hint"><code>Iterator::size_hint()</code></a>.
+It is unnameable except through the associated type, <code>&lt;Self as Exhaust&gt;::Iter</code>.</p>
+</li>
+</ul>
+<p>The <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug"><code>fmt::Debug</code></a> implementations currently print only a placeholder with no details.
+This may be changed in future versions.</p>
+<p>All of the generated types have names like <code>Exhaust&lt;your type name&gt;&lt;some suffix&gt;</code>.
+Unfortunately, it is <em>possible</em> for these names to conflict with your code’s names;
+but conflicts will not occur as long as you avoid <em>using</em> any items named <code>ExhaustFoo*</code>
+from within a type named <code>Foo</code>.
+Items which are merely in the same module do not interfere, because only the code generated
+by the <code>derive(Exhaust)</code> macro is affected.</p>
+<h2 id="example"><a class="doc-anchor" href="#example">§</a>Example</h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>exhaust::Exhaust;
+
+<span class="attr">#[derive(PartialEq, Debug, Exhaust)]
+</span><span class="kw">struct </span>Foo {
+    a: bool,
+    b: Bar,
+}
+
+<span class="attr">#[derive(PartialEq, Debug, Exhaust)]
+</span><span class="kw">enum </span>Bar {
+    One,
+    Two(bool),
+}
+
+<span class="macro">assert_eq!</span>(
+    Foo::exhaust().collect::&lt;Vec&lt;Foo&gt;&gt;(),
+    <span class="macro">vec!</span>[
+        Foo { a: <span class="bool-val">false</span>, b: Bar::One },
+        Foo { a: <span class="bool-val">false</span>, b: Bar::Two(<span class="bool-val">false</span>) },
+        Foo { a: <span class="bool-val">false</span>, b: Bar::Two(<span class="bool-val">true</span>) },
+        Foo { a: <span class="bool-val">true</span>, b: Bar::One },
+        Foo { a: <span class="bool-val">true</span>, b: Bar::Two(<span class="bool-val">false</span>) },
+        Foo { a: <span class="bool-val">true</span>, b: Bar::Two(<span class="bool-val">true</span>) },
+    ],
+);</code></pre></div>
+</div></details></section></div></main></body></html>
